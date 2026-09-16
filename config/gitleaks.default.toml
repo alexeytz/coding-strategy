@@ -1,0 +1,47 @@
+# Starter gitleaks config — copy to a project as .gitleaks.toml.
+# Follows the default.* convention from phase-1 §3: don't edit this file in place,
+# copy it and edit the copy.
+
+title = "project secret scan"
+
+# Inherit the upstream rule set; add project rules below rather than replacing it.
+[extend]
+useDefault = true
+
+# --- Project-specific rules -------------------------------------------------
+# [[rules]]
+#   id = "internal-service-token"
+#   description = "Internal service token"
+#   regex = '''svc_[a-zA-Z0-9]{32}'''
+#   tags = ["token", "internal"]
+
+# --- Allowlist --------------------------------------------------------------
+# Every entry needs a reason. An allowlist without reasons becomes a place
+# where real secrets go to hide.
+#
+# NO LOOKAROUND. gitleaks compiles these with Go's RE2, which has none — and a
+# `(?!` or `(?<` does not fail that one rule, it PANICS the entire scan. The
+# hook then reports a crash rather than a verdict, so the repo is unprotected
+# while still appearing to have a scanner. Cost a debugging cycle on
+# 2026-09-05; write two narrower rules instead of one with a negative
+# lookahead.
+[allowlist]
+description = "Known-safe placeholders and fixtures"
+paths = [
+  '''\.env\.example$''',        # placeholder values only, by convention
+  '''(^|/)tests?/fixtures?/''', # test fixtures with fake credentials
+  # NO docs/ ENTRY, deliberately. It shipped here until 2026-09-11 as
+  # "documentation examples" and was removed after a probe: the same
+  # `ghp_`-shaped token was BLOCKED in src/ and COMMITTED CLEAN in docs/ with
+  # this file installed as .gitleaks.toml. Setup instructions are exactly where
+  # someone pastes a live token while writing them down, so this entry made the
+  # scanner report clean on the highest-risk path in the repo — the "quietly
+  # no-ops, and you'll trust it" failure the hook's own header calls worse than
+  # none. If doc examples trip the scan, allowlist the fake value by regex
+  # below, not the whole directory by path.
+]
+regexes = [
+  '''EXAMPLE_[A-Z_]+''',
+  '''(?i)your[-_]?(api[-_]?)?key[-_]?here''',
+  '''xxxx+''',
+]

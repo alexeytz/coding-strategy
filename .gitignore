@@ -1,0 +1,7 @@
+# Session-chain files written by agent tooling into any git project directory.
+# Local lookup aids, never repo content. T16 fails the suite if one is tracked.
+sessions.txt
+
+# Editor / OS noise
+.DS_Store
+*.swp
