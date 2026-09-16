@@ -138,12 +138,26 @@ fi
 # them. Split in two on 2026-09-13: one card could not stay under T13's ceiling once
 # the strategy reached 19 phase files, and shaving it was deleting load-bearing rules.
 # Coverage is asserted over the union, so a phase may be summarised in either card.
+# Linking is necessary but not sufficient: a group heading with no rules under it
+# satisfied the link check while summarising nothing, and phase-7b sat that way from
+# the split until 2026-09-16. A card claiming coverage it does not deliver is worse
+# than an honest omission, because the reader who loaded the card instead of the
+# phase file has no way to tell. So every group must carry at least one rule line.
 errs=""
 for f in references/phase-*.md; do
   b="$(basename "$f")"
   grep -qh "($b)" references/rules-card*.md || errs="$errs\n    no rules card links $b"
 done
-[ -z "$errs" ] && ok "T12 rules cards cover every phase file" || bad "T12 rules card coverage" "$errs"
+for c in references/rules-card*.md; do
+  empty="$(awk '/^## /{if(h!="" && n==0) print h; h=$0; n=0; next} /^- /{n++} END{if(h!="" && n==0) print h}' "$c")"
+  [ -n "$empty" ] && while IFS= read -r h; do
+    errs="$errs\n    $(basename "$c"): group with no rules — ${h#\#\# }"
+  done <<EOF
+$empty
+EOF
+done
+[ -z "$errs" ] && ok "T12 rules cards cover every phase file, every group carrying rules" \
+               || bad "T12 rules card coverage" "$errs"
 
 # --- 13. Rules card stays materially cheaper than the phases it replaces ----
 # Two bounds, because the card is exempt from T11: relative (it must stay a
@@ -259,6 +273,9 @@ if [ "${1:-}" = "--self-test" ]; then
   probe "T9  TODO"        "printf 'TODO: x\\n' >> AGENTS.md"
   probe "T10 shell"       "printf 'if then fi(\\n' >> config/pre-commit-secret-scan.sh"
   probe "T11 size"        "python3 -c \"open('references/phase-6-reference.md','a').write('x'*11000)\""
+  # Deletes the only rule under a card group, leaving the heading and its link. The
+  # link check still passes; the group summarises nothing. That is how phase-7b sat.
+  probe "T12 empty group" "python3 -c \"import re,pathlib; p=pathlib.Path('references/rules-card.md'); s=p.read_text(); i=s.index('## Documenting'); j=s.index('## ', i+3); p.write_text(s[:i] + '\\n'.join(s[i:j].split(chr(10))[:2]) + chr(10)*2 + s[j:])\""
   probe "T14 status"      "printf '\\n### B999 — probe\\n\\nno status line\\n' >> backlog.md"
   # Safe to spell literally here: T15 scans *.md only, and this is a shell script.
   probe "T15 pointer"     "printf '\\nSee phase-6 \u00a799 here.\\n' >> references/phase-6-reference.md"

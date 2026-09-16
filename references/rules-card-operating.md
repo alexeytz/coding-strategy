@@ -36,6 +36,8 @@ per rule, no rationale, open the named phase file for detail.
 
 ## The findings log — detail in [phase-7b-findings-log.md](phase-7b-findings-log.md)
 
+- Every finding carries a severity, assigned after it is verified and by consequence, not by how alarming it reads.
+- An empty findings file fifteen minutes in is a defect in your run, not evidence of none.
 
 ## Verifying findings — detail in [phase-7c-verifying-findings.md](phase-7c-verifying-findings.md)
 

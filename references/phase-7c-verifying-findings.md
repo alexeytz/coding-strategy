@@ -95,7 +95,7 @@ verification cost drops sharply after the first two. Four exits per row, no fift
    finding, an extraction, a relocation. Exit 2 is unreachable here: a
    behaviour-preserving move has no test that could fail on the pre-fix tree, and a
    finding forced down exit 2 gets closed with a test that proves nothing. Verify it
-   with the round-trip check in [phase 3b §9](phase-3b-verifying.md) instead.
+   with the round-trip check in [phase 3d §21](phase-3d-checking-what-you-claim.md) instead.
 
 This list stood at three for a long time and said "no fourth". It was wrong: a
 structural finding that survived both gates in [7a](phase-7a-running-a-review.md)
