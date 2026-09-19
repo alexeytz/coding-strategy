@@ -4,16 +4,16 @@ Part of the `coding-strategy` skill. Language-agnostic patterns extracted from r
 projects (HLM plugin, Odysseus, ComfyUI, vibecode-setup-public). Not dogma — follow
 unless there's a reason not to.
 
-Other phases: [1a](phase-1a-layout.md) · [1b](phase-1b-config-and-setup.md) · [2a](phase-2a-designing-a-change.md) · [2b](phase-2b-recording-and-shipping.md) · [3a](phase-3a-writing-resilient-code.md) · [3b](phase-3b-verifying.md) · [3c](phase-3c-documenting.md) · [3d](phase-3d-checking-what-you-claim.md) · [4](phase-4-quality-gates.md) · [5a](phase-5a-context-docs.md) · [5b](phase-5b-working-and-delegating.md) · [5c](phase-5c-maintaining-context-docs.md) · [6](phase-6-reference.md) · [7a](phase-7a-running-a-review.md) · [7b](phase-7b-findings-log.md) · [7c](phase-7c-verifying-findings.md) · [7d](phase-7d-what-a-round-is-worth.md) · [8b](phase-8b-instrumentation.md) · [9](phase-9-releasing.md) · [10](phase-10-data-architecture.md) — full names in [SKILL.md](../SKILL.md)
+Other phases: [1a](phase-1a-layout.md) · [1b](phase-1b-config-and-setup.md) · [2a](phase-2a-designing-a-change.md) · [2b](phase-2b-recording-and-shipping.md) · [3a](phase-3a-writing-resilient-code.md) · [3b](phase-3b-verifying.md) · [3c](phase-3c-documenting.md) · [3d](phase-3d-checking-what-you-claim.md) · [3e](phase-3e-pre-commit-security.md) · [3f](phase-3f-numbers-you-can-publish.md) · [4](phase-4-quality-gates.md) · [5a](phase-5a-context-docs.md) · [5b](phase-5b-working-and-delegating.md) · [5c](phase-5c-maintaining-context-docs.md) · [6](phase-6-reference.md) · [7a](phase-7a-running-a-review.md) · [7b](phase-7b-findings-log.md) · [7c](phase-7c-verifying-findings.md) · [7d](phase-7d-what-a-round-is-worth.md) · [8b](phase-8b-instrumentation.md) · [9](phase-9-releasing.md) · [10](phase-10-data-architecture.md) — full names in [SKILL.md](../SKILL.md)
 
 ---
 
 The contract before the operator leaves, the loop, when to stop, and what to hand
 back. Trusting what you measured while doing it is [8b](phase-8b-instrumentation.md);
 delegating a bounded task to a subagent is
-[phase 5b §15](phase-5b-working-and-delegating.md).
+[phase 5b §17](phase-5b-working-and-delegating.md).
 
-### 19. Unattended runs
+### 22. Unattended runs
 
 The operator leaves; an agent runs for hours and must not need a decision. **Write
 the contract down.** One project reconstructed its overnight procedure from memory
@@ -41,7 +41,7 @@ confirmed." A brief that will run more than once is a template plus a config, an
 renderer refuses to emit one with an unfilled slot. For a single run this layer is
 overhead — write the fields inline. And note what it is not: an agent honouring a grant
 it can read is a compliance assumption, not a mechanism, so the grants that matter are
-also enforced where the action happens ([phase 3a §8](phase-3a-writing-resilient-code.md)
+also enforced where the action happens ([phase 3a §7](phase-3a-writing-resilient-code.md)
 on dry-run defaults).
 
 **Two more fields, because the four above are all about correctness.** An agent doing

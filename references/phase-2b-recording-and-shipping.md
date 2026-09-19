@@ -4,7 +4,7 @@ Part of the `coding-strategy` skill. Language-agnostic patterns extracted from r
 projects (HLM plugin, Odysseus, ComfyUI, vibecode-setup-public). Not dogma — follow
 unless there's a reason not to.
 
-Other phases: [1a](phase-1a-layout.md) · [1b](phase-1b-config-and-setup.md) · [2a](phase-2a-designing-a-change.md) · [3a](phase-3a-writing-resilient-code.md) · [3b](phase-3b-verifying.md) · [3c](phase-3c-documenting.md) · [3d](phase-3d-checking-what-you-claim.md) · [4](phase-4-quality-gates.md) · [5a](phase-5a-context-docs.md) · [5b](phase-5b-working-and-delegating.md) · [5c](phase-5c-maintaining-context-docs.md) · [6](phase-6-reference.md) · [7a](phase-7a-running-a-review.md) · [7b](phase-7b-findings-log.md) · [7c](phase-7c-verifying-findings.md) · [7d](phase-7d-what-a-round-is-worth.md) · [8a](phase-8a-unattended-runs.md) · [8b](phase-8b-instrumentation.md) · [9](phase-9-releasing.md) · [10](phase-10-data-architecture.md) — full names in [SKILL.md](../SKILL.md)
+Other phases: [1a](phase-1a-layout.md) · [1b](phase-1b-config-and-setup.md) · [2a](phase-2a-designing-a-change.md) · [3a](phase-3a-writing-resilient-code.md) · [3b](phase-3b-verifying.md) · [3c](phase-3c-documenting.md) · [3d](phase-3d-checking-what-you-claim.md) · [3e](phase-3e-pre-commit-security.md) · [3f](phase-3f-numbers-you-can-publish.md) · [4](phase-4-quality-gates.md) · [5a](phase-5a-context-docs.md) · [5b](phase-5b-working-and-delegating.md) · [5c](phase-5c-maintaining-context-docs.md) · [6](phase-6-reference.md) · [7a](phase-7a-running-a-review.md) · [7b](phase-7b-findings-log.md) · [7c](phase-7c-verifying-findings.md) · [7d](phase-7d-what-a-round-is-worth.md) · [8a](phase-8a-unattended-runs.md) · [8b](phase-8b-instrumentation.md) · [9](phase-9-releasing.md) · [10](phase-10-data-architecture.md) — full names in [SKILL.md](../SKILL.md)
 
 ---
 
@@ -88,7 +88,7 @@ later commit undoes.
 If a push has nowhere to go, that is a question, not a problem to solve — the same shape as a
 contradictory task assignment ([phase 2a §4](phase-2a-designing-a-change.md)). Whether you may
 push at all, and on what cadence, is the Autonomy field of the standing protocol
-([phase 8a §19](phase-8a-unattended-runs.md)); this rule is about *where*, that one is about
+([phase 8a §22](phase-8a-unattended-runs.md)); this rule is about *where*, that one is about
 *whether*.
 
 #### The pre-commit sweep
@@ -98,7 +98,7 @@ the ones nobody remembered were downstream of the edit. Keep a **documentation u
 matrix** — change class in one column, the files it drags in the other — and walk it before
 every commit. Copy `config/doc-update-matrix.template.md`.
 
-Four steps, in order: run the doc-truth checks ([phase 3b §9](phase-3b-verifying.md));
+Four steps, in order: run the doc-truth checks ([phase 3b §8](phase-3b-verifying.md));
 read `git diff --cached --name-only` against the matrix and open the targets for every class
 present; **write the changelog entry now rather than at release time**, because the reasoning
 is in your head today and a changelog reconstructed at tag time records what changed and

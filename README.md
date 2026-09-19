@@ -13,8 +13,8 @@ follows them. This one is a **routing table**. You never load the whole strategy
 maps a trigger ("about to commit", "auditing code you did not write", "running for hours with
 nobody watching") to exactly one file, and that file is one job, sized to be loaded on its own.
 
-Twenty-one phase files hold twenty-five numbered sections. Each section lives in exactly one
-file, and a test asserts it.
+Each numbered section lives in exactly one phase file, and a test asserts it — along with the
+routing table matching what is on disk, and no file exceeding the budget that makes it loadable.
 
 ## Using it
 
@@ -90,7 +90,7 @@ A green check is not evidence until you have seen it go red.
 | Path | What |
 |---|---|
 | [`SKILL.md`](SKILL.md) | The routing table. This is the product |
-| [`references/`](references/) | 21 phase files, the two rules cards, the tiering checklist, small-model guidance |
+| [`references/`](references/) | The phase files, the two rules cards, the tiering checklist, small-model guidance |
 | [`config/`](config/) | Copy targets for projects adopting this |
 | [`operator-guide.md`](operator-guide.md) | The human's half: quota, tool routing, hosting custody, decisions an agent must not make alone |
 | [`tests/`](tests/) | The structural suite that keeps the above honest |

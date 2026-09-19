@@ -4,14 +4,14 @@ Part of the `coding-strategy` skill. Language-agnostic patterns extracted from r
 projects (HLM plugin, Odysseus, ComfyUI, vibecode-setup-public). Not dogma — follow
 unless there's a reason not to.
 
-Other phases: [1a](phase-1a-layout.md) · [1b](phase-1b-config-and-setup.md) · [2a](phase-2a-designing-a-change.md) · [2b](phase-2b-recording-and-shipping.md) · [3a](phase-3a-writing-resilient-code.md) · [3b](phase-3b-verifying.md) · [3d](phase-3d-checking-what-you-claim.md) · [4](phase-4-quality-gates.md) · [5a](phase-5a-context-docs.md) · [5b](phase-5b-working-and-delegating.md) · [5c](phase-5c-maintaining-context-docs.md) · [6](phase-6-reference.md) · [7a](phase-7a-running-a-review.md) · [7b](phase-7b-findings-log.md) · [7c](phase-7c-verifying-findings.md) · [7d](phase-7d-what-a-round-is-worth.md) · [8a](phase-8a-unattended-runs.md) · [8b](phase-8b-instrumentation.md) · [9](phase-9-releasing.md) · [10](phase-10-data-architecture.md) — full names in [SKILL.md](../SKILL.md)
+Other phases: [1a](phase-1a-layout.md) · [1b](phase-1b-config-and-setup.md) · [2a](phase-2a-designing-a-change.md) · [2b](phase-2b-recording-and-shipping.md) · [3a](phase-3a-writing-resilient-code.md) · [3b](phase-3b-verifying.md) · [3d](phase-3d-checking-what-you-claim.md) · [3e](phase-3e-pre-commit-security.md) · [3f](phase-3f-numbers-you-can-publish.md) · [4](phase-4-quality-gates.md) · [5a](phase-5a-context-docs.md) · [5b](phase-5b-working-and-delegating.md) · [5c](phase-5c-maintaining-context-docs.md) · [6](phase-6-reference.md) · [7a](phase-7a-running-a-review.md) · [7b](phase-7b-findings-log.md) · [7c](phase-7c-verifying-findings.md) · [7d](phase-7d-what-a-round-is-worth.md) · [8a](phase-8a-unattended-runs.md) · [8b](phase-8b-instrumentation.md) · [9](phase-9-releasing.md) · [10](phase-10-data-architecture.md) — full names in [SKILL.md](../SKILL.md)
 
 ---
 
 How you explain the code to the next reader — the docstring, the README, the changelog.
 Showing that it works is [phase 3b](phase-3b-verifying.md).
 
-### 10. Code Documentation
+### 9. Code Documentation
 
 Principles for code-level documentation. Syntax (triple quotes, `///`, `/**`) belongs in language-specific skills — these are the rules that apply everywhere.
 
@@ -61,7 +61,7 @@ Every project ships a `README.md` that answers:
 **Two documents share the name "changelog".** One is release notes for users — grouped
 Added/Changed/Fixed, written for someone who did not read the diff. The other is a decision
 record for whoever maintains the code: why a finding was refuted, why the code is shaped
-this way, what a review already considered and rejected. [Phase 7a §16](phase-7a-running-a-review.md)
+this way, what a review already considered and rejected. [Phase 7a §19](phase-7a-running-a-review.md)
 sends a reviewer to the second one, and the rules below describe the first. Say in your repo
 which file is which, and if you keep only one, say which job wins — applied literally to the
 second, "skip internal refactors, write for the user" deletes the artifact a review depends on.

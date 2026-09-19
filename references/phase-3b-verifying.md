@@ -4,7 +4,7 @@ Part of the `coding-strategy` skill. Language-agnostic patterns extracted from r
 projects (HLM plugin, Odysseus, ComfyUI, vibecode-setup-public). Not dogma — follow
 unless there's a reason not to.
 
-Other phases: [1a](phase-1a-layout.md) · [1b](phase-1b-config-and-setup.md) · [2a](phase-2a-designing-a-change.md) · [2b](phase-2b-recording-and-shipping.md) · [3a](phase-3a-writing-resilient-code.md) · [3c](phase-3c-documenting.md) · [3d](phase-3d-checking-what-you-claim.md) · [4](phase-4-quality-gates.md) · [5a](phase-5a-context-docs.md) · [5b](phase-5b-working-and-delegating.md) · [5c](phase-5c-maintaining-context-docs.md) · [6](phase-6-reference.md) · [7a](phase-7a-running-a-review.md) · [7b](phase-7b-findings-log.md) · [7c](phase-7c-verifying-findings.md) · [7d](phase-7d-what-a-round-is-worth.md) · [8a](phase-8a-unattended-runs.md) · [8b](phase-8b-instrumentation.md) · [9](phase-9-releasing.md) · [10](phase-10-data-architecture.md) — full names in [SKILL.md](../SKILL.md)
+Other phases: [1a](phase-1a-layout.md) · [1b](phase-1b-config-and-setup.md) · [2a](phase-2a-designing-a-change.md) · [2b](phase-2b-recording-and-shipping.md) · [3a](phase-3a-writing-resilient-code.md) · [3c](phase-3c-documenting.md) · [3d](phase-3d-checking-what-you-claim.md) · [3e](phase-3e-pre-commit-security.md) · [3f](phase-3f-numbers-you-can-publish.md) · [4](phase-4-quality-gates.md) · [5a](phase-5a-context-docs.md) · [5b](phase-5b-working-and-delegating.md) · [5c](phase-5c-maintaining-context-docs.md) · [6](phase-6-reference.md) · [7a](phase-7a-running-a-review.md) · [7b](phase-7b-findings-log.md) · [7c](phase-7c-verifying-findings.md) · [7d](phase-7d-what-a-round-is-worth.md) · [8a](phase-8a-unattended-runs.md) · [8b](phase-8b-instrumentation.md) · [9](phase-9-releasing.md) · [10](phase-10-data-architecture.md) — full names in [SKILL.md](../SKILL.md)
 
 ---
 
@@ -12,7 +12,7 @@ How you show the code works. Explaining it to the next reader is
 [phase 3c](phase-3c-documenting.md); making it resilient in the first place is
 [phase 3a](phase-3a-writing-resilient-code.md).
 
-### 9. Test Isolation + Living Test Plan
+### 8. Test Isolation + Living Test Plan
 
 **Test isolation:**
 - Tests run in isolation — temp DBs, temp dirs, mocked external deps
@@ -97,7 +97,7 @@ path reads exactly like a login path that is fine. Keep a table of the flows who
 failure would be an incident — flow, entry point, covering test — where an uncovered
 flow is a *row saying so* and a named test that does not exist is a failing check.
 Where a project can only afford one map, fold the column into the test plan rather
-than starting a second document ([phase 5a §13](phase-5a-context-docs.md) on why two
+than starting a second document ([phase 5a §15](phase-5a-context-docs.md) on why two
 maps of one territory drift).
 
 **Confirm the run mode you are actually in writes a log.** A preflight that validates

@@ -4,7 +4,7 @@ Part of the `coding-strategy` skill. Language-agnostic patterns extracted from r
 projects (HLM plugin, Odysseus, ComfyUI, vibecode-setup-public). Not dogma — follow
 unless there's a reason not to.
 
-Other phases: [1a](phase-1a-layout.md) · [1b](phase-1b-config-and-setup.md) · [2a](phase-2a-designing-a-change.md) · [2b](phase-2b-recording-and-shipping.md) · [3a](phase-3a-writing-resilient-code.md) · [3b](phase-3b-verifying.md) · [3c](phase-3c-documenting.md) · [3d](phase-3d-checking-what-you-claim.md) · [4](phase-4-quality-gates.md) · [5a](phase-5a-context-docs.md) · [5b](phase-5b-working-and-delegating.md) · [5c](phase-5c-maintaining-context-docs.md) · [6](phase-6-reference.md) · [7a](phase-7a-running-a-review.md) · [7b](phase-7b-findings-log.md) · [7d](phase-7d-what-a-round-is-worth.md) · [8a](phase-8a-unattended-runs.md) · [8b](phase-8b-instrumentation.md) · [9](phase-9-releasing.md) · [10](phase-10-data-architecture.md) — full names in [SKILL.md](../SKILL.md)
+Other phases: [1a](phase-1a-layout.md) · [1b](phase-1b-config-and-setup.md) · [2a](phase-2a-designing-a-change.md) · [2b](phase-2b-recording-and-shipping.md) · [3a](phase-3a-writing-resilient-code.md) · [3b](phase-3b-verifying.md) · [3c](phase-3c-documenting.md) · [3d](phase-3d-checking-what-you-claim.md) · [3e](phase-3e-pre-commit-security.md) · [3f](phase-3f-numbers-you-can-publish.md) · [4](phase-4-quality-gates.md) · [5a](phase-5a-context-docs.md) · [5b](phase-5b-working-and-delegating.md) · [5c](phase-5c-maintaining-context-docs.md) · [6](phase-6-reference.md) · [7a](phase-7a-running-a-review.md) · [7b](phase-7b-findings-log.md) · [7d](phase-7d-what-a-round-is-worth.md) · [8a](phase-8a-unattended-runs.md) · [8b](phase-8b-instrumentation.md) · [9](phase-9-releasing.md) · [10](phase-10-data-architecture.md) — full names in [SKILL.md](../SKILL.md)
 
 ---
 
@@ -12,7 +12,7 @@ What happens to a single finding after it is filed. Producing findings is
 [7a](phase-7a-running-a-review.md); logging them is [7b](phase-7b-findings-log.md);
 how much a whole round is worth is [7d](phase-7d-what-a-round-is-worth.md).
 
-### 18. Verifying, refuting and dispositioning
+### 21. Verifying, refuting and dispositioning
 
 **Verify every finding before acting on it.** Of the first four Criticals one review
 loop produced, two did not reproduce. Drive the claim against the code; do not act
@@ -67,7 +67,7 @@ to was already settled; the note was framed as "worth a line in the note if you 
 Running it found a defect worse than the one under discussion — a branch that blocked *every*
 commit, in code three careful readers and an entire static round had never executed.
 
-The rule generalises the one in [phase 4 §11](phase-4-quality-gates.md): a check is not evidence
+The rule generalises the one in [phase 4 §13](phase-4-quality-gates.md): a check is not evidence
 until you have seen it exercise the path. Applied there to a gate, applied here to a review — a
 note naming an untested branch is the cheapest execution lead you will get, because someone who
 just read that code is telling you where they did not look.
@@ -95,7 +95,7 @@ verification cost drops sharply after the first two. Four exits per row, no fift
    finding, an extraction, a relocation. Exit 2 is unreachable here: a
    behaviour-preserving move has no test that could fail on the pre-fix tree, and a
    finding forced down exit 2 gets closed with a test that proves nothing. Verify it
-   with the round-trip check in [phase 3d §21](phase-3d-checking-what-you-claim.md) instead.
+   with the round-trip check in [phase 3d §10](phase-3d-checking-what-you-claim.md) instead.
 
 This list stood at three for a long time and said "no fourth". It was wrong: a
 structural finding that survived both gates in [7a](phase-7a-running-a-review.md)

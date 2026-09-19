@@ -4,7 +4,7 @@ Part of the `coding-strategy` skill. Language-agnostic patterns extracted from r
 projects (HLM plugin, Odysseus, ComfyUI, vibecode-setup-public). Not dogma — follow
 unless there's a reason not to.
 
-Other phases: [1a](phase-1a-layout.md) · [1b](phase-1b-config-and-setup.md) · [2a](phase-2a-designing-a-change.md) · [2b](phase-2b-recording-and-shipping.md) · [3a](phase-3a-writing-resilient-code.md) · [3b](phase-3b-verifying.md) · [3c](phase-3c-documenting.md) · [3d](phase-3d-checking-what-you-claim.md) · [4](phase-4-quality-gates.md) · [5a](phase-5a-context-docs.md) · [5b](phase-5b-working-and-delegating.md) · [5c](phase-5c-maintaining-context-docs.md) · [6](phase-6-reference.md) · [7a](phase-7a-running-a-review.md) · [7b](phase-7b-findings-log.md) · [7c](phase-7c-verifying-findings.md) · [7d](phase-7d-what-a-round-is-worth.md) · [8a](phase-8a-unattended-runs.md) · [8b](phase-8b-instrumentation.md) · [10](phase-10-data-architecture.md) — full names in [SKILL.md](../SKILL.md)
+Other phases: [1a](phase-1a-layout.md) · [1b](phase-1b-config-and-setup.md) · [2a](phase-2a-designing-a-change.md) · [2b](phase-2b-recording-and-shipping.md) · [3a](phase-3a-writing-resilient-code.md) · [3b](phase-3b-verifying.md) · [3c](phase-3c-documenting.md) · [3d](phase-3d-checking-what-you-claim.md) · [3e](phase-3e-pre-commit-security.md) · [3f](phase-3f-numbers-you-can-publish.md) · [4](phase-4-quality-gates.md) · [5a](phase-5a-context-docs.md) · [5b](phase-5b-working-and-delegating.md) · [5c](phase-5c-maintaining-context-docs.md) · [6](phase-6-reference.md) · [7a](phase-7a-running-a-review.md) · [7b](phase-7b-findings-log.md) · [7c](phase-7c-verifying-findings.md) · [7d](phase-7d-what-a-round-is-worth.md) · [8a](phase-8a-unattended-runs.md) · [8b](phase-8b-instrumentation.md) · [10](phase-10-data-architecture.md) — full names in [SKILL.md](../SKILL.md)
 
 ---
 
@@ -27,7 +27,7 @@ suite runs after tagging, the tag is a promise you had not checked.
    cannot be reasoned about afterwards.
 2. **Write the changelog entry, including what was tried and rejected.** The version
    being tagged has an entry — assert that mechanically, as
-   [phase 3d §21](phase-3d-checking-what-you-claim.md) describes, so it holds whether or
+   [phase 3d §10](phase-3d-checking-what-you-claim.md) describes, so it holds whether or
    not anyone remembers this procedure. The entry's value is the part most often left
    out: the approach that did not work, so the next release does not retry it.
 3. **Push an annotated tag, and push it with the commits.** An annotated tag carries who
@@ -45,7 +45,7 @@ it is the one commit nobody re-reads.
 Two more things a release breaks that ordinary commits do not:
 
 - **Your checks read the tree; your users get the artifact.** Build it and assert the
-  invariant there ([phase 3d §21](phase-3d-checking-what-you-claim.md)). A release is
+  invariant there ([phase 3d §10](phase-3d-checking-what-you-claim.md)). A release is
   exactly when the gap between the two becomes someone else's problem.
 - **A generated file that ships is a claim about its source.** Regenerate and diff as
   part of the release, rather than trusting that whoever touched the source also ran the
@@ -56,7 +56,7 @@ Two more things a release breaks that ordinary commits do not:
 Ask what undoes this *before* pushing, not after: yanking a package, reverting a
 migration, rolling back a deployment. Where the answer is "nothing", that is not a reason
 to skip the question — it is the one release that needs a staged rollout or a flag, and
-it is a [phase 8a §19](phase-8a-unattended-runs.md) one-way action when an agent is doing
+it is a [phase 8a §22](phase-8a-unattended-runs.md) one-way action when an agent is doing
 the pushing. Where the answer is "revert the commit", say so in the changelog entry; the
 person who needs it will be reading under pressure.
 

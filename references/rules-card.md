@@ -18,7 +18,7 @@ Dropping a line here deletes nothing.
 - A feature touches at most 2 source files. Needing 5 means the interface is wrong — fix that, don't spread the feature.
 - Record an honest over-count in the design doc; never hide call sites behind indirection to satisfy it.
 - Keep call sites greppable — no names built at runtime; one literal table when you need indirection.
-- At 3+ candidates per input the dispatcher asserts the contract and names every candidate it tried.
+- Once several modules compete for one input, the dispatcher asserts the contract and names every candidate it tried.
 
 ## Config and setup — detail in [phase-1b-config-and-setup.md](phase-1b-config-and-setup.md)
 
@@ -49,8 +49,6 @@ Dropping a line here deletes nothing.
 
 ## Writing resilient code — detail in [phase-3a-writing-resilient-code.md](phase-3a-writing-resilient-code.md)
 
-- Secret scanning runs as a blocking pre-commit hook, and fails closed when no scanner is installed.
-- A secret that reached a remote is burned: rotate first, clean history second, fix the hook third.
 - Circuit-break external dependencies after N consecutive failures; fall back; reset on success.
 - An inner `try` that swallows a failure makes the breaker around it permanently inert.
 - One `try` over two subsystems misnames every failure of the second. Split it.
@@ -77,6 +75,11 @@ Dropping a line here deletes nothing.
 - Index flows to tests, not only tests to assertions — an uncovered flow is a row, not a silence.
 - Characterise a flake by looping it and recording the rate; rerun-and-green is not a fix.
 
+## Documenting — detail in [phase-3c-documenting.md](phase-3c-documenting.md)
+
+- Don't document obvious code, implementation detail, change history, or TODOs.
+- README answers: what, why, how to run, how to extend, known limits.
+
 ## Checking what you claim — detail in [phase-3d-checking-what-you-claim.md](phase-3d-checking-what-you-claim.md)
 
 - Make doc drift fail mechanically: documented counts, `file:NNN` references, generated files, cited paths.
@@ -84,16 +87,21 @@ Dropping a line here deletes nothing.
 - Don't write an exact count or byte figure into prose. Cite the band.
 - If you ship an artifact, one test builds it and asserts the invariant there, and fails rather than skips when the build tool is missing.
 - A move that preserves content is proved by round-trip against the pinned pre-move commit, not by review.
+- An in-place remap of numbers or IDs is proved by sampling pointers against content; the pointer checks go vacuous.
 - A generated file carries a generator-written header, and a check asserts the header is there.
+
+## Pre-commit security — detail in [phase-3e-pre-commit-security.md](phase-3e-pre-commit-security.md)
+
+- Secret scanning runs as a blocking pre-commit hook, and fails closed when no scanner is installed.
+- A secret that reached a remote is burned: rotate first, clean history second, fix the hook third.
+- Probe the hook in both directions: a live-looking token must block, a clean commit must pass.
+
+## Numbers you can publish — detail in [phase-3f-numbers-you-can-publish.md](phase-3f-numbers-you-can-publish.md)
+
 - Publish the noise floor before any A/B — one arm against itself, three runs. Under the floor is not a result.
 - Prefer a counter to a timing; compare against a control arm the harness runs, not against nothing.
 - Derive the exit code from the predicate the report prints; an empty success is a defect.
 - Every gate, spec and results table names what it does not cover, and what defeats it if protective.
-
-## Documenting — detail in [phase-3c-documenting.md](phase-3c-documenting.md)
-
-- Don't document obvious code, implementation detail, change history, or TODOs.
-- README answers: what, why, how to run, how to extend, known limits.
 
 ## Quality gates — detail in [phase-4-quality-gates.md](phase-4-quality-gates.md)
 

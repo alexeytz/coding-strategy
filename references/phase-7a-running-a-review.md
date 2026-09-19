@@ -4,7 +4,7 @@ Part of the `coding-strategy` skill. Language-agnostic patterns extracted from r
 projects (HLM plugin, Odysseus, ComfyUI, vibecode-setup-public). Not dogma — follow
 unless there's a reason not to.
 
-Other phases: [1a](phase-1a-layout.md) · [1b](phase-1b-config-and-setup.md) · [2a](phase-2a-designing-a-change.md) · [2b](phase-2b-recording-and-shipping.md) · [3a](phase-3a-writing-resilient-code.md) · [3b](phase-3b-verifying.md) · [3c](phase-3c-documenting.md) · [3d](phase-3d-checking-what-you-claim.md) · [4](phase-4-quality-gates.md) · [5a](phase-5a-context-docs.md) · [5b](phase-5b-working-and-delegating.md) · [5c](phase-5c-maintaining-context-docs.md) · [6](phase-6-reference.md) · [7b](phase-7b-findings-log.md) · [7c](phase-7c-verifying-findings.md) · [7d](phase-7d-what-a-round-is-worth.md) · [8a](phase-8a-unattended-runs.md) · [8b](phase-8b-instrumentation.md) · [9](phase-9-releasing.md) · [10](phase-10-data-architecture.md) — full names in [SKILL.md](../SKILL.md)
+Other phases: [1a](phase-1a-layout.md) · [1b](phase-1b-config-and-setup.md) · [2a](phase-2a-designing-a-change.md) · [2b](phase-2b-recording-and-shipping.md) · [3a](phase-3a-writing-resilient-code.md) · [3b](phase-3b-verifying.md) · [3c](phase-3c-documenting.md) · [3d](phase-3d-checking-what-you-claim.md) · [3e](phase-3e-pre-commit-security.md) · [3f](phase-3f-numbers-you-can-publish.md) · [4](phase-4-quality-gates.md) · [5a](phase-5a-context-docs.md) · [5b](phase-5b-working-and-delegating.md) · [5c](phase-5c-maintaining-context-docs.md) · [6](phase-6-reference.md) · [7b](phase-7b-findings-log.md) · [7c](phase-7c-verifying-findings.md) · [7d](phase-7d-what-a-round-is-worth.md) · [8a](phase-8a-unattended-runs.md) · [8b](phase-8b-instrumentation.md) · [9](phase-9-releasing.md) · [10](phase-10-data-architecture.md) — full names in [SKILL.md](../SKILL.md)
 
 ---
 
@@ -13,7 +13,7 @@ exists — yours, an agent's, or a contributor's. Here: how to read it and what 
 as a finding. Recording findings is [7b](phase-7b-findings-log.md); deciding what to
 do with them is [7c](phase-7c-verifying-findings.md).
 
-### 16. Reviewing code you did not write
+### 19. Reviewing code you did not write
 
 **Orient before reading any implementation file.** Read the root context doc, the
 trust-boundary doc if there is one, and the handover's "traps" and "settled with
@@ -57,11 +57,11 @@ findings that argue against themselves.
 **One carve-out, and it is narrow.** A finding that names a documented standard the
 code violates — a layout rule, an interface convention, a boundary the context doc
 draws — has no behavioural impact by construction, so the gate above deletes it, and
-[7b §17](phase-7b-findings-log.md) has a Minor tier defined as exactly that finding.
+[7b §20](phase-7b-findings-log.md) has a Minor tier defined as exactly that finding.
 Keep it only when it names the standard **and** the change the violation made harder.
 "This file is in the wrong directory" is the ritual the gate exists to stop; "this is
 the third call site I had to edit because the helper was never extracted" is a
-finding. It disposes through exit 4 in [phase 7c §18](phase-7c-verifying-findings.md).
+finding. It disposes through exit 4 in [phase 7c §21](phase-7c-verifying-findings.md).
 
 **Intent gate.** Before proposing a fix, look for the comment, docstring or
 changelog entry explaining why the code is as it is. If one exists, your fix must

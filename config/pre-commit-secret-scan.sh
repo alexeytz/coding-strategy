@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Pre-commit secret scan — the enforcement half of phase-3 §7.
+# Pre-commit secret scan — the enforcement half of phase-3e §11.
 #
 # Install into a project:
 #   cp config/pre-commit-secret-scan.sh <project>/.githooks/pre-commit

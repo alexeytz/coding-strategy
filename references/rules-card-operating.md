@@ -12,14 +12,6 @@ per rule, no rationale, open the named phase file for detail.
 - Create AGENTS.md immediately if you are duplicating code or unsure where a file belongs.
 - The top-level doc holds what is expensive to relearn, not a description of the project.
 
-## Maintaining context docs — detail in [phase-5c-maintaining-context-docs.md](phase-5c-maintaining-context-docs.md)
-
-- Root context doc near 200 lines, domain doc near 300. Over budget: split or prune, don't compress.
-- Run the task without the rule before adding it; if the agent already complies, don't add it.
-- An incident buys a check, not a doc paragraph. Never paste a value a command could print.
-- A rule scoped to a file pattern gets its own glob-scoped file, not a paragraph in the root doc.
-- A `last-verified` date you will not refresh is worse than none.
-
 ## Working & delegating — detail in [phase-5b-working-and-delegating.md](phase-5b-working-and-delegating.md)
 
 - Before editing, read the root AGENTS.md and every AGENTS.md on the path to each target. Don't rely on memory.
@@ -27,6 +19,14 @@ per rule, no rationale, open the named phase file for detail.
 - After a meaningful change, update the nearest owning AGENTS.md and delete text that has gone stale.
 - Output consumed by agents is plain text or markdown over JSON, minimal fields, deterministic order.
 - Every subagent is defined by name, invocation, purpose, and an explicit negative constraint.
+
+## Maintaining context docs — detail in [phase-5c-maintaining-context-docs.md](phase-5c-maintaining-context-docs.md)
+
+- Root context doc near 200 lines, domain doc near 300. Over budget: split or prune, don't compress.
+- Run the task without the rule before adding it; if the agent already complies, don't add it.
+- An incident buys a check, not a doc paragraph. Never paste a value a command could print.
+- A rule scoped to a file pattern gets its own glob-scoped file, not a paragraph in the root doc.
+- A `last-verified` date you will not refresh is worse than none.
 
 ## Running a review — detail in [phase-7a-running-a-review.md](phase-7a-running-a-review.md)
 

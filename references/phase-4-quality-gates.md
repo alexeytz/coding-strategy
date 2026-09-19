@@ -4,11 +4,11 @@ Part of the `coding-strategy` skill. Language-agnostic patterns extracted from r
 projects (HLM plugin, Odysseus, ComfyUI, vibecode-setup-public). Not dogma — follow
 unless there's a reason not to.
 
-Other phases: [1a](phase-1a-layout.md) · [1b](phase-1b-config-and-setup.md) · [2a](phase-2a-designing-a-change.md) · [2b](phase-2b-recording-and-shipping.md) · [3a](phase-3a-writing-resilient-code.md) · [3b](phase-3b-verifying.md) · [3c](phase-3c-documenting.md) · [3d](phase-3d-checking-what-you-claim.md) · [5a](phase-5a-context-docs.md) · [5b](phase-5b-working-and-delegating.md) · [5c](phase-5c-maintaining-context-docs.md) · [6](phase-6-reference.md) · [7a](phase-7a-running-a-review.md) · [7b](phase-7b-findings-log.md) · [7c](phase-7c-verifying-findings.md) · [7d](phase-7d-what-a-round-is-worth.md) · [8a](phase-8a-unattended-runs.md) · [8b](phase-8b-instrumentation.md) · [9](phase-9-releasing.md) · [10](phase-10-data-architecture.md) — full names in [SKILL.md](../SKILL.md)
+Other phases: [1a](phase-1a-layout.md) · [1b](phase-1b-config-and-setup.md) · [2a](phase-2a-designing-a-change.md) · [2b](phase-2b-recording-and-shipping.md) · [3a](phase-3a-writing-resilient-code.md) · [3b](phase-3b-verifying.md) · [3c](phase-3c-documenting.md) · [3d](phase-3d-checking-what-you-claim.md) · [3e](phase-3e-pre-commit-security.md) · [3f](phase-3f-numbers-you-can-publish.md) · [5a](phase-5a-context-docs.md) · [5b](phase-5b-working-and-delegating.md) · [5c](phase-5c-maintaining-context-docs.md) · [6](phase-6-reference.md) · [7a](phase-7a-running-a-review.md) · [7b](phase-7b-findings-log.md) · [7c](phase-7c-verifying-findings.md) · [7d](phase-7d-what-a-round-is-worth.md) · [8a](phase-8a-unattended-runs.md) · [8b](phase-8b-instrumentation.md) · [9](phase-9-releasing.md) · [10](phase-10-data-architecture.md) — full names in [SKILL.md](../SKILL.md)
 
 ---
 
-### 11. Audit-Gated Milestones
+### 13. Audit-Gated Milestones
 
 Formal report before declaring a milestone "done." Timestamped. GO/NO-GO verdict.
 
@@ -54,7 +54,7 @@ diagnostics and teaches everyone to ignore the linter. Turn the whole thing on *
 and report it as a delta against the merge base, keyed so unrelated line shifts do not read
 as new findings. A rule graduates to **blocking** only when an incident bought it, and its
 config comment names that incident. Keep the two in separate jobs so the blocking set is
-never diluted by the advisory noise. This is [phase 3b §9](phase-3b-verifying.md)'s ratchet
+never diluted by the advisory noise. This is [phase 3b §8](phase-3b-verifying.md)'s ratchet
 pointed at a linter — and the same threshold decides between them: on a small or new
 codebase, fixing everything and turning the linter fully blocking is cheaper than building
 the two-job machinery. The delta gate is for the tree too large to fix this week.
@@ -68,7 +68,7 @@ guards catch accidents and casual attempts, not a determined author; branch prot
 human review of workflow diffs remain the real backstop." The absence of that section is
 the defect, not the absence of coverage. It is a documentation habit rather than a
 mechanism, so it survives only where a doc-truth check asserts the section exists
-([phase 3d §21](phase-3d-checking-what-you-claim.md)); without one it becomes the ritual
+([phase 3d §10](phase-3d-checking-what-you-claim.md)); without one it becomes the ritual
 paragraph nobody updates when coverage changes.
 
 #### A gate you have not seen fail is not a gate
@@ -91,7 +91,7 @@ The same rule read backwards: a check that cannot run is not a gate either. A pa
 required check stays pending forever when no matching file changes, which blocks the merge it was
 meant to guard.
 
-### 12. Handover Protocol
+### 14. Handover Protocol
 
 Structured markdown document for session continuity.
 

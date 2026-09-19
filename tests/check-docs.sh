@@ -156,7 +156,22 @@ for c in references/rules-card*.md; do
 $empty
 EOF
 done
-[ -z "$errs" ] && ok "T12 rules cards cover every phase file, every group carrying rules" \
+# Third assertion: the groups appear in the order SKILL.md routes to them. A card is read
+# as a substitute for the phase files, so a reader who knows the routing order should not
+# have to re-find their place in it. Both cards had drifted — 3e ahead of 3b, 3d ahead of
+# 3c, 5c ahead of 5b — and one of those was introduced by the commit that added the group.
+# Non-phase groups (Reference) sort last and are not ranked.
+for c in references/rules-card*.md; do
+  prev=-1        # per card: the two cards are separate selections, not one sequence
+  while IFS= read -r g; do
+    r="$(grep -n "phase-[a-z0-9-]*\.md" SKILL.md | grep -o 'references/phase-[a-z0-9-]*\.md' \
+         | awk '!seen[$0]++' | grep -n "/$g\$" | cut -d: -f1)"
+    [ -z "$r" ] && continue
+    [ "$r" -lt "$prev" ] && errs="$errs\n    $(basename "$c"): group for $g comes after a later-routed phase"
+    prev="$r"
+  done < <(grep -oE '^## .+ — detail in \[(phase-[a-z0-9-]+\.md)\]' "$c" | grep -oE 'phase-[a-z0-9-]+\.md')
+done
+[ -z "$errs" ] && ok "T12 rules cards cover every phase file, in routing order, no empty groups" \
                || bad "T12 rules card coverage" "$errs"
 
 # --- 13. Rules card stays materially cheaper than the phases it replaces ----
@@ -192,7 +207,14 @@ if [ -f backlog.md ]; then
   sts="$(grep -c '^\*\*Status:\*\* \(open\|absorbed\|declined\)$' backlog.md)"
   [ "$ids" -gt 0 ] || errs="$errs\n    backlog.md exists but declares no ### B<n> items"
   [ "$ids" -eq "$sts" ] || errs="$errs\n    $ids items but $sts valid Status lines (open|absorbed|declined)"
-  [ -z "$errs" ] && ok "T14 backlog items all carry a decided status ($ids items)" \
+  # A decided item also says WHEN. Seven declined entries sat undated for six weeks
+  # because nothing looked, and the dates had to be recovered from git rather than
+  # read — a weaker fact than one written at the time. An undecided item has no date
+  # to carry, so only absorbed and declined are checked.
+  dec="$(grep -c '^\*\*Status:\*\* \(absorbed\|declined\)$' backlog.md)"
+  dated="$(grep -c '^\*\*\(Absorbed\|Declined\):\*\* [0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}' backlog.md)"
+  [ "$dec" -eq "$dated" ] || errs="$errs\n    $dec decided items but $dated carry an ISO date on an Absorbed:/Declined: line"
+  [ -z "$errs" ] && ok "T14 backlog items carry a decided status and a date ($ids items)" \
                  || bad "T14 backlog status integrity" "$errs"
 else
   ok "T14 no backlog.md (nothing to check)"
@@ -219,9 +241,33 @@ while IFS=: read -r f ref; do
   elif ! grep -q "^### $sec\." "$tgt"; then
     errs="$errs\n    $f cites '$ref' — §$sec is not in $(basename "$tgt")"
   fi
-done < <(grep -rno 'phase[- ][0-9]\+[a-z]\? *§[0-9]\+' --include='*.md' . \
-         | grep -v '^./designs/' | sed 's/:[0-9]*:/:/' | sort -u)
-[ -z "$errs" ] && ok "T15 prose section pointers resolve to the right phase file" \
+done < <( { grep -rno 'phase[- ][0-9]\+[a-z]\? *§[0-9]\+' --include='*.md' . \
+              | grep -v '^./designs/'
+            # Shipped config assets cite sections too, and are not .md, so the scan above
+            # never saw them. All four were found on 2026-09-17 naming pre-split phase
+            # files that had not existed for weeks — shipped to every adopting project.
+            grep -no 'phase[- ][0-9]\+[a-z]\? *§[0-9]\+' \
+              config/gitleaks.default.toml config/env.example \
+              config/pre-commit-secret-scan.sh 2>/dev/null | sed 's|^|./|'
+          } | sed 's/:[0-9]*:/:/' | sort -u)
+
+# The dominant citation form is a markdown link followed by the section — and the prose
+# scan above cannot see it, because the file name is inside the link rather than beside
+# the §. That is how eleven stale pointers sat in backlog.md through three splits while
+# T1 passed (the path resolves) and T15 passed (it never looked). Found by remapping the
+# section numbers and checking content, not by any guard. Now guarded.
+while IFS=: read -r f ref; do
+  tgt="references/$(echo "$ref" | sed 's/^.*(\(.*\)).*$/\1/; s|^references/||; s|^\.\./||')"
+  sec="$(echo "$ref" | sed 's/.*§//')"
+  if [ ! -f "$tgt" ]; then
+    errs="$errs\n    $f links '$ref' — $tgt does not exist"
+  elif ! grep -q "^### $sec\." "$tgt"; then
+    errs="$errs\n    $f links '$ref' — §$sec is not in $(basename "$tgt")"
+  fi
+done < <(grep -rnoE '\]\((\.\./)?(references/)?phase-[a-z0-9-]+\.md\) *§[0-9]+' \
+           --include='*.md' . | grep -v '^./designs/' | sed 's/:[0-9]*:/:/' | sort -u)
+
+[ -z "$errs" ] && ok "T15 section pointers resolve, in prose and in links" \
                || bad "T15 stale phase §-pointers" "$errs"
 
 # --- 16. The artifacts AGENTS.md forbids by name are absent ---------------
@@ -276,9 +322,16 @@ if [ "${1:-}" = "--self-test" ]; then
   # Deletes the only rule under a card group, leaving the heading and its link. The
   # link check still passes; the group summarises nothing. That is how phase-7b sat.
   probe "T12 empty group" "python3 -c \"import re,pathlib; p=pathlib.Path('references/rules-card.md'); s=p.read_text(); i=s.index('## Documenting'); j=s.index('## ', i+3); p.write_text(s[:i] + '\\n'.join(s[i:j].split(chr(10))[:2]) + chr(10)*2 + s[j:])\""
+  probe "T12 order"      "python3 -c \"import re, pathlib; f = pathlib.Path('references/rules-card.md'); parts = re.split(r'(?m)^(?=## )', f.read_text()); g = [x for x in parts if x.startswith('## ')]; h = [x for x in parts if not x.startswith('## ')]; g[1], g[4] = g[4], g[1]; f.write_text(''.join(h + g))\""
   probe "T14 status"      "printf '\\n### B999 — probe\\n\\nno status line\\n' >> backlog.md"
+  probe "T14 date"        "printf '\\n### B999 — probe\\n\\n**Status:** declined\\n**Declined:** someday\\n' >> backlog.md"
   # Safe to spell literally here: T15 scans *.md only, and this is a shell script.
   probe "T15 pointer"     "printf '\\nSee phase-6 \u00a799 here.\\n' >> references/phase-6-reference.md"
+  # The link form is a separate scan from the prose form and shipped failing open once:
+  # a malformed BRE matched nothing while T15 reported PASS on a seeded break. Probe both
+  # forms, and the non-.md shipped assets separately — the scan reaches those only by name.
+  probe "T15 link"        "printf '\\nSee [x](references/phase-1a-layout.md) \u00a799 here.\\n' >> handover.md"
+  probe "T15 asset"     "printf '\\n# see phase-1b \u00a799\\n' >> config/env.example"
   probe "T16 forbidden"   "touch sessions.txt && git add -f sessions.txt"
   echo
   [ "$st_fail" -eq 0 ] && echo "self-test: all guards bite" || echo "self-test: $st_fail guard(s) did not fire"

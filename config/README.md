@@ -5,10 +5,10 @@ skill — these are files you copy into a target project.
 
 | File | Copy to | Mandated by |
 |------|---------|-------------|
-| `AGENTS.root.template.md` | `<project>/AGENTS.md` | phase-5a §13 (Context Docs) |
-| `AGENTS.child.template.md` | `<project>/<domain>/AGENTS.md` | phase-5a §13 |
-| `pre-commit-secret-scan.sh` | `<project>/.githooks/pre-commit` | phase-3a §7 (Pre-commit Security) |
-| `gitleaks.default.toml` | `<project>/.gitleaks.toml` | phase-3a §7 |
+| `AGENTS.root.template.md` | `<project>/AGENTS.md` | phase-5a §15 (Context Docs) |
+| `AGENTS.child.template.md` | `<project>/<domain>/AGENTS.md` | phase-5a §15 |
+| `pre-commit-secret-scan.sh` | `<project>/.githooks/pre-commit` | phase-3e §11 (Pre-commit Security) |
+| `gitleaks.default.toml` | `<project>/.gitleaks.toml` | phase-3e §11 |
 | `env.example` | `<project>/.env.example` | phase-1b §2 (Config Split) |
 | `feature-tracker.template.md` | `<project>/docs/consider-features.md` | phase-2b §5 (Decision Records) |
 | `doc-update-matrix.template.md` | `<project>/docs/doc-update-matrix.md` | phase-2b §6 (the pre-commit sweep) |
