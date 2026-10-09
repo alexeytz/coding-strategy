@@ -8,10 +8,11 @@ skill — these are files you copy into a target project.
 | `AGENTS.root.template.md` | `<project>/AGENTS.md` | phase-5a §15 (Context Docs) |
 | `AGENTS.child.template.md` | `<project>/<domain>/AGENTS.md` | phase-5a §15 |
 | `pre-commit-secret-scan.sh` | `<project>/.githooks/pre-commit` | phase-3e §11 (Pre-commit Security) |
+| `pre-push-verify.sh` | `<project>/.githooks/pre-push` | phase-2c §6 (main advances on green) |
 | `gitleaks.default.toml` | `<project>/.gitleaks.toml` | phase-3e §11 |
 | `env.example` | `<project>/.env.example` | phase-1b §2 (Config Split) |
 | `feature-tracker.template.md` | `<project>/docs/consider-features.md` | phase-2b §5 (Decision Records) |
-| `doc-update-matrix.template.md` | `<project>/docs/doc-update-matrix.md` | phase-2b §6 (the pre-commit sweep) |
+| `doc-update-matrix.template.md` | `<project>/docs/doc-update-matrix.md` | phase-2c §6 (the pre-commit sweep) |
 
 The `*.template.md` files carry `TODO:` markers as the fill-in convention — a copied template
 with markers still in it is an unfinished doc, not a finished one. This repo's own root

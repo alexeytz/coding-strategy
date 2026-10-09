@@ -41,7 +41,10 @@ Thin interface, fat engine, pluggable features. One feature touches at most 2 so
 Design doc before code. Docs ship with the change. Tests in isolation.
 
 Not dogma — follow unless there's a reason not to, and scale the ceremony to the project
-(see `references/project-checklist.md` for the size tiers).
+(see `references/project-checklist.md` for the size tiers). Your environment is a reason too:
+model, harness, tools, team size, budget, the language's own conventions. Record each
+deliberate deviation in the project's root `AGENTS.md` with its reason — an unrecorded one
+looks like drift, and the next session "fixes" it back.
 
 ## Load only what you need
 
@@ -57,7 +60,8 @@ working-set budget and what to escalate.
 | **1a: Layout** | `references/phase-1a-layout.md` | Starting a project, or deciding where code goes | Interface/Engine/Features, the two-file invariant and when to record an exception, keeping call sites findable, dispatcher contracts |
 | **1b: Config and setup** | `references/phase-1b-config-and-setup.md` | Wiring configuration, or making a checkout runnable | Config split and precedence, making resolution observable, externalized configurables, one-command setup, one verification entry point |
 | **2a: Designing a change** | `references/phase-2a-designing-a-change.md` | Before writing code, planning a feature | Design docs (incl. test timing), interview loop, task assignments (`ta/`) |
-| **2b: Recording & shipping** | `references/phase-2b-recording-and-shipping.md` | Deciding what not to build, or about to commit | Decision records and the feature tracker, commit conventions, the pre-commit documentation sweep |
+| **2b: Decision records** | `references/phase-2b-decision-records.md` | Deciding what not to build, or recording why you chose this | Decision records with dated reasons, the feature tracker, numbers never reused |
+| **2c: Shipping** | `references/phase-2c-shipping.md` | About to commit, push, or advance the main branch | Commit conventions, the pre-commit documentation sweep and update matrix, pushing only where you were told, main advances on green |
 | **3a: Writing resilient code** | `references/phase-3a-writing-resilient-code.md` | Writing or hardening code | Circuit breakers, null guards, graceful degradation, idempotent migrations, parameterized queries, dry-run defaults, fencing untrusted content |
 | **3b: Verifying** | `references/phase-3b-verifying.md` | Writing tests or a test plan | Test isolation, living test plan, runner/fixer separation, naming a tier by what it proves, doc-truth checks |
 | **3c: Documenting** | `references/phase-3c-documenting.md` | Writing docstrings, README or changelog | Behavior not implementation, what to document and what not to, docstrings for agents, README and changelog conventions |
@@ -77,6 +81,7 @@ working-set budget and what to escalate.
 | **8b: Instrumentation** | `references/phase-8b-instrumentation.md` | Believing a measurement taken by your own tooling | Verify the instrument before trusting it, counts versus membership, self-matching predicates, bounding logs to the session |
 | **9: Releasing** | `references/phase-9-releasing.md` | Cutting a release, tagging, shipping | Version assertion across files, the changelog entry with what was rejected, annotated tags, what a release breaks that commits do not, deciding reversibility first |
 | **10: Data architecture** | `references/phase-10-data-architecture.md` | More than one copy of the data — a cache, index, vector store or replica | Naming the source of truth, proving authority before a destructive reconciliation, namespacing by semantics, test namespaces on shared services, the sync check |
+| **11: Debugging** | `references/phase-11-debugging.md` | Something failed and you do not know why | Reproduce before believing the report, diff a working example against the broken one, trace the bad value back to where it was produced |
 
 ## Quick access
 

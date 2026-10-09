@@ -37,8 +37,9 @@ working-set budget that answers it.
 ## Adopting it in your project
 
 [`config/`](config/) holds copy targets, documented in [`config/README.md`](config/README.md):
-AGENTS.md templates, a pre-commit secret-scanning hook with a gitleaks config, a feature tracker,
-a doc-update matrix, an `.env.example`. Copy them, then edit the copy — they are meant to be
+AGENTS.md templates, a pre-commit secret-scanning hook with a gitleaks config, a pre-push hook
+that refuses to advance the main branch on a red suite, a feature tracker, a doc-update matrix,
+an `.env.example`. Copy them, then edit the copy — they are meant to be
 overwritten cleanly by a later update.
 
 Start with [`references/project-checklist.md`](references/project-checklist.md), which tiers the
@@ -82,8 +83,9 @@ A green check is not evidence until you have seen it go red.
 - **The suite tests the documents, never the behaviour.** Nothing here proves an agent follows
   the rules; it proves the documents are internally consistent. Closing that gap needs enough
   repeated runs to separate compliance from noise, which is an expense rather than a check.
-- **Not dogma.** Every phase file says so in its own header. Scale it down; the checklist tells
-  you where.
+- **Not dogma.** Every phase file says so in its own header. Scale it down — the checklist tells
+  you where — and adapt it to your own model, tools and team. Record each deliberate deviation
+  in the project's `AGENTS.md` (the template has a slot), so the next session does not undo it.
 
 ## Repository map
 

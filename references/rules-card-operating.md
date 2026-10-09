@@ -17,6 +17,7 @@ per rule, no rationale, open the named phase file for detail.
 - Before editing, read the root AGENTS.md and every AGENTS.md on the path to each target. Don't rely on memory.
 - The nearest doc wins on local detail; the parent wins on project-wide rules.
 - After a meaningful change, update the nearest owning AGENTS.md and delete text that has gone stale.
+- A doc problem noticed in passing is fixed now or filed now — in the existing backlog, never a new file. Your context will not keep it.
 - Output consumed by agents is plain text or markdown over JSON, minimal fields, deterministic order.
 - Every subagent is defined by name, invocation, purpose, and an explicit negative constraint.
 

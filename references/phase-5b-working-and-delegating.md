@@ -4,7 +4,7 @@ Part of the `coding-strategy` skill. Language-agnostic patterns extracted from r
 projects (HLM plugin, Odysseus, ComfyUI, vibecode-setup-public). Not dogma — follow
 unless there's a reason not to.
 
-Other phases: [1a](phase-1a-layout.md) · [1b](phase-1b-config-and-setup.md) · [2a](phase-2a-designing-a-change.md) · [2b](phase-2b-recording-and-shipping.md) · [3a](phase-3a-writing-resilient-code.md) · [3b](phase-3b-verifying.md) · [3c](phase-3c-documenting.md) · [3d](phase-3d-checking-what-you-claim.md) · [3e](phase-3e-pre-commit-security.md) · [3f](phase-3f-numbers-you-can-publish.md) · [4](phase-4-quality-gates.md) · [5a](phase-5a-context-docs.md) · [5c](phase-5c-maintaining-context-docs.md) · [6](phase-6-reference.md) · [7a](phase-7a-running-a-review.md) · [7b](phase-7b-findings-log.md) · [7c](phase-7c-verifying-findings.md) · [7d](phase-7d-what-a-round-is-worth.md) · [8a](phase-8a-unattended-runs.md) · [8b](phase-8b-instrumentation.md) · [9](phase-9-releasing.md) · [10](phase-10-data-architecture.md) — full names in [SKILL.md](../SKILL.md)
+Other phases: [1a](phase-1a-layout.md) · [1b](phase-1b-config-and-setup.md) · [2a](phase-2a-designing-a-change.md) · [2b](phase-2b-decision-records.md) · [2c](phase-2c-shipping.md) · [3a](phase-3a-writing-resilient-code.md) · [3b](phase-3b-verifying.md) · [3c](phase-3c-documenting.md) · [3d](phase-3d-checking-what-you-claim.md) · [3e](phase-3e-pre-commit-security.md) · [3f](phase-3f-numbers-you-can-publish.md) · [4](phase-4-quality-gates.md) · [5a](phase-5a-context-docs.md) · [5c](phase-5c-maintaining-context-docs.md) · [6](phase-6-reference.md) · [7a](phase-7a-running-a-review.md) · [7b](phase-7b-findings-log.md) · [7c](phase-7c-verifying-findings.md) · [7d](phase-7d-what-a-round-is-worth.md) · [8a](phase-8a-unattended-runs.md) · [8b](phase-8b-instrumentation.md) · [9](phase-9-releasing.md) · [10](phase-10-data-architecture.md) · [11](phase-11-debugging.md) — full names in [SKILL.md](../SKILL.md)
 
 ---
 
@@ -62,6 +62,18 @@ converts a request into a mechanism.
 **Update parent docs when:** parent-level structure, ownership, workflow, or child index changes.
 **Update child docs when:** parent changes alter local rules.
 **Remove stale or contradictory text immediately.**
+
+**A doc problem you notice while doing something else leaves your head before your context
+does.** A person who spots a stale path can act on it tomorrow; an agent's noticing does not
+survive compaction or the end of a session, so deferring it is discarding it. Fix it in the
+current commit when it is cheap and in a file you have open. Otherwise file one line in the
+backlog the project already keeps ([phase 7c §21](phase-7c-verifying-findings.md)) — or, at a
+tier with no backlog, in the commit message of the work in hand, which is the record those tiers
+keep. Needing that repeatedly is [the checklist's](project-checklist.md) own trigger to create
+one. **Never a second file:** a `doc-issues.md` beside a findings backlog is the second map
+[phase 5a §15](phase-5a-context-docs.md) exists to prevent. And filing is not licence to chase —
+recording an out-of-scope observation and moving on is what [phase 7b §20](phase-7b-findings-log.md)
+already prescribes.
 
 Small edits that don't change behavior or contracts may leave docs unchanged, but the doc pass still must happen.
 

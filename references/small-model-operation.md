@@ -91,6 +91,27 @@ these to a larger model or a human, and let the small model execute the result:
 Good targets for the small model: a well-scoped assignment with named paths, an existing
 pattern to imitate, and a test that says when it's done.
 
+## Hand down a failing test, not a plan
+
+A hand-down must be something the small model can be held to. Prose gets reinterpreted; a
+red test does not. The larger model writes, before any code:
+
+- The task assignment, per the rules above.
+- Acceptance criteria a command can check.
+- Failing tests encoding them, committed red ([phase 2a](phase-2a-designing-a-change.md)):
+  tests the implementer writes fit its implementation, and a small model fits harder.
+
+The small model loops — edit, run, fix the cause — until green.
+
+- **Handed-down tests are read-only.** A wrong-looking test is a question back up; weakening
+  it is the cheapest route to green, and a small model finds it.
+- **Done is the command's output, not a sentence** ([phase 3d](phase-3d-checking-what-you-claim.md)).
+
+The larger model closes by reviewing the diff against its criteria — a bounded read, not an
+audit. Expensive tokens go on specifying and accepting, cheap on the middle. Where no
+failing test can be written first — exploration, layout, debugging without a repro — skip the
+split.
+
 ## Repeat a rung before climbing one
 
 When a step is worth escalating, the reflex is to climb the effort or model ladder. Two

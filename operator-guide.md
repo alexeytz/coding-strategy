@@ -65,6 +65,12 @@ Track usage across the tools available to you and rotate based on remaining quot
 always reaching for the same one. An agent cannot do this for you: it has no visibility into
 another tool's account.
 
+Quota decides *which account* a task runs on; the kind of work decides *which grade of model*.
+Put specifying and accepting on the strongest model you have — design, acceptance criteria,
+the failing tests, the final diff review — and implementation on the cheapest model that can
+turn those tests green. The hand-down format and where the split stops working are in
+`references/small-model-operation.md` (*Hand down a failing test, not a plan*).
+
 ---
 
 ## Decisions the agent must not make alone
@@ -95,7 +101,7 @@ Collected from across the phases, for when you're deciding how much rope to give
 
   Whatever you choose, configure the remote yourself and let the agent inherit it. The agent
   half of this rule — never add a remote, never push to a host it was not given — is in
-  `references/phase-2b-recording-and-shipping.md` §6, because it is a rule an agent can follow
+  `references/phase-2b-decision-records.md` §6, because it is a rule an agent can follow
   and this is a judgement it cannot make.
 
 - **Accumulated self-modifications** — if you enabled the experimental self-modifying

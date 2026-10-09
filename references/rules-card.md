@@ -40,11 +40,15 @@ Dropping a line here deletes nothing.
 - Order of work: design doc → test skeleton → engine code → tests pass.
 - A contradictory assignment is a question for the user, not a choice for you.
 
-## Recording & shipping — detail in [phase-2b-recording-and-shipping.md](phase-2b-recording-and-shipping.md)
+## Decision records — detail in [phase-2b-decision-records.md](phase-2b-decision-records.md)
 
 - Every feature idea gets a numbered decision-log entry with a dated reason, open ones included. Numbers are never reused.
+
+## Shipping — detail in [phase-2c-shipping.md](phase-2c-shipping.md)
+
 - Commit types: `feat` `fix` `docs` `test` `clean`.
 - Push only to the remote you were given. Never add, retarget or create one — hosting is the operator's call.
+- Main only advances on green: gate the push or merge, not every commit. Several commits before verifying means branch first.
 - Every behavioral change ships its doc update in the same commit: walk the doc-update matrix against the staged diff, and write the changelog entry then. When a row's drift recurs, replace it with a check.
 
 ## Writing resilient code — detail in [phase-3a-writing-resilient-code.md](phase-3a-writing-resilient-code.md)
@@ -131,3 +135,10 @@ Dropping a line here deletes nothing.
 
 Operating rules — context docs, delegation, review, unattended runs — are in
 [rules-card-operating.md](rules-card-operating.md).
+
+## Debugging — detail in [phase-11-debugging.md](phase-11-debugging.md)
+
+- No fix before the cause is located; a symptom that stops showing is not a cause that stopped happening.
+- Reproduce it yourself before believing the report, in both directions where there are two.
+- Put a working example beside the broken one and list every difference; the diff is the diagnosis.
+- Trace the bad value back to where it was produced, not to where it surfaced.

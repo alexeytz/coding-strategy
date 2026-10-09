@@ -18,6 +18,10 @@ TODO: Owner or team responsible for this repo.
 - Use conventional commits: `feat:`, `fix:`, `docs:`, `test:`, `clean:`
 - Every behavioral change ships with its doc update — same commit, or the next one before more code lands
 
+- **Deliberate deviations from `coding-strategy`** — one line each: the rule, why it does not
+  fit here, and what would change that. Listed rules are not drift; do not "fix" them back.
+  - None yet.
+
 <!-- Add project-specific tool rules here, e.g. which MCP server to use for a given
      operation, or commands that must not be run directly. Delete this comment when filled. -->
 

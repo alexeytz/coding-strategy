@@ -49,7 +49,7 @@ grep -qi '^  Use when' SKILL.md || fm_errs="$fm_errs\n    description does not s
 
 # --- 4. Section numbering 1..15 continuous and unique across phases --------
 nums="$(grep -ho '^### [0-9]\+\.' references/phase-*.md | tr -d '#. ' | sort -n)"
-want="$(seq 1 25)"
+want="$(seq 1 26)"
 if [ "$nums" = "$want" ]; then
   ok "T4 sections 1-$(echo "$want" | tail -1) present exactly once across phase files"
 else
@@ -76,7 +76,8 @@ fi
 errs=""
 for f in config/AGENTS.root.template.md config/AGENTS.child.template.md \
          operator-guide.md references/project-checklist.md \
-         config/pre-commit-secret-scan.sh config/gitleaks.default.toml config/env.example \
+         config/pre-commit-secret-scan.sh config/pre-push-verify.sh \
+         config/gitleaks.default.toml config/env.example \
          config/feature-tracker.template.md config/doc-update-matrix.template.md; do
   [ -e "$f" ] || errs="$errs\n    missing: $f"
 done
@@ -228,7 +229,7 @@ fi
 # it does not check. A guard that fails open is the B20 shape. Don't re-narrow these.
 # T1 only sees markdown links. The phase-2 split renamed a file whose sections were
 # cited in prose across five files, and nothing caught it — the same class the phase-3
-# split had to sweep by hand. Second occurrence, so it gets a check (phase-2b §6).
+# split had to sweep by hand. Second occurrence, so it gets a check (phase-2c §6).
 # designs/ is excluded: a design doc is decision history and cites the phase names that
 # were current when it was written.
 errs=""
@@ -264,8 +265,16 @@ while IFS=: read -r f ref; do
   elif ! grep -q "^### $sec\." "$tgt"; then
     errs="$errs\n    $f links '$ref' — §$sec is not in $(basename "$tgt")"
   fi
-done < <(grep -rnoE '\]\((\.\./)?(references/)?phase-[a-z0-9-]+\.md\) *§[0-9]+' \
-           --include='*.md' . | grep -v '^./designs/' | sed 's/:[0-9]*:/:/' | sort -u)
+done < <( { grep -rnoE '\]\((\.\./)?(references/)?phase-[a-z0-9-]+\.md\) *§[0-9]+' \
+              --include='*.md' .
+            # Third form, found 2026-09-27: the phase id with no "phase" word AND the section
+            # inside the link text. The prose scan needs the literal "phase"; the scan above
+            # needs the section after the closing paren. This has neither, so it escaped both —
+            # and the first one ever written was wrong. Normalised into the shape above.
+            grep -rnoE '\[[0-9]+[a-z]? *§[0-9]+\]\((\.\./)?(references/)?phase-[a-z0-9-]+\.md\)' \
+              --include='*.md' . \
+              | sed -E 's/\[[0-9]+[a-z]? *(§[0-9]+)\]\((.*)\)/](\2) \1/'
+          } | grep -v '^./designs/' | sed 's/:[0-9]*:/:/' | sort -u)
 
 [ -z "$errs" ] && ok "T15 section pointers resolve, in prose and in links" \
                || bad "T15 stale phase §-pointers" "$errs"
@@ -331,6 +340,7 @@ if [ "${1:-}" = "--self-test" ]; then
   # a malformed BRE matched nothing while T15 reported PASS on a seeded break. Probe both
   # forms, and the non-.md shipped assets separately — the scan reaches those only by name.
   probe "T15 link"        "printf '\\nSee [x](references/phase-1a-layout.md) \u00a799 here.\\n' >> handover.md"
+  probe "T15 bare"        "printf '\\nSee [1a \u00a799](references/phase-1a-layout.md) here.\\n' >> handover.md"
   probe "T15 asset"     "printf '\\n# see phase-1b \u00a799\\n' >> config/env.example"
   probe "T16 forbidden"   "touch sessions.txt && git add -f sessions.txt"
   echo

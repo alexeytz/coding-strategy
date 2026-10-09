@@ -4,7 +4,7 @@ Part of the `coding-strategy` skill. Language-agnostic patterns extracted from r
 projects (HLM plugin, Odysseus, ComfyUI, vibecode-setup-public). Not dogma — follow
 unless there's a reason not to.
 
-Other phases: [1a](phase-1a-layout.md) · [1b](phase-1b-config-and-setup.md) · [2a](phase-2a-designing-a-change.md) · [2b](phase-2b-recording-and-shipping.md) · [3a](phase-3a-writing-resilient-code.md) · [3b](phase-3b-verifying.md) · [3c](phase-3c-documenting.md) · [3d](phase-3d-checking-what-you-claim.md) · [3e](phase-3e-pre-commit-security.md) · [3f](phase-3f-numbers-you-can-publish.md) · [4](phase-4-quality-gates.md) · [5a](phase-5a-context-docs.md) · [5b](phase-5b-working-and-delegating.md) · [5c](phase-5c-maintaining-context-docs.md) · [6](phase-6-reference.md) · [7a](phase-7a-running-a-review.md) · [7b](phase-7b-findings-log.md) · [7d](phase-7d-what-a-round-is-worth.md) · [8a](phase-8a-unattended-runs.md) · [8b](phase-8b-instrumentation.md) · [9](phase-9-releasing.md) · [10](phase-10-data-architecture.md) — full names in [SKILL.md](../SKILL.md)
+Other phases: [1a](phase-1a-layout.md) · [1b](phase-1b-config-and-setup.md) · [2a](phase-2a-designing-a-change.md) · [2b](phase-2b-decision-records.md) · [2c](phase-2c-shipping.md) · [3a](phase-3a-writing-resilient-code.md) · [3b](phase-3b-verifying.md) · [3c](phase-3c-documenting.md) · [3d](phase-3d-checking-what-you-claim.md) · [3e](phase-3e-pre-commit-security.md) · [3f](phase-3f-numbers-you-can-publish.md) · [4](phase-4-quality-gates.md) · [5a](phase-5a-context-docs.md) · [5b](phase-5b-working-and-delegating.md) · [5c](phase-5c-maintaining-context-docs.md) · [6](phase-6-reference.md) · [7a](phase-7a-running-a-review.md) · [7b](phase-7b-findings-log.md) · [7d](phase-7d-what-a-round-is-worth.md) · [8a](phase-8a-unattended-runs.md) · [8b](phase-8b-instrumentation.md) · [9](phase-9-releasing.md) · [10](phase-10-data-architecture.md) · [11](phase-11-debugging.md) — full names in [SKILL.md](../SKILL.md)
 
 ---
 
@@ -90,7 +90,7 @@ verification cost drops sharply after the first two. Four exits per row, no fift
 2. **Reproduces** — fix it, add a regression test that fails against the pre-fix
    tree, delete the row.
 3. **Reproduces but should not be fixed** — move it to the decision record with the
-   reasoning ([phase 2b §5](phase-2b-recording-and-shipping.md)).
+   reasoning ([phase 2b §5](phase-2b-decision-records.md)).
 4. **Reproduces, and the fix moves content rather than changing it** — a conformance
    finding, an extraction, a relocation. Exit 2 is unreachable here: a
    behaviour-preserving move has no test that could fail on the pre-fix tree, and a
