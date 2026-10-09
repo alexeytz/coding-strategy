@@ -42,7 +42,7 @@ Dropping a line here deletes nothing.
 
 ## Decision records — detail in [phase-2b-decision-records.md](phase-2b-decision-records.md)
 
-- Every feature idea gets a numbered decision-log entry with a dated reason, open ones included. Numbers are never reused.
+- A choice, a decline or a reversal gets a numbered decision-log entry with a dated reason, open ones included; routine changes get a changelog line. Numbers are never reused.
 
 ## Shipping — detail in [phase-2c-shipping.md](phase-2c-shipping.md)
 
@@ -71,7 +71,6 @@ Dropping a line here deletes nothing.
 
 - Tests run isolated: temp dirs and DBs, mocked externals, no shared state, one file per feature area.
 - A test runner reports; a test fixer fixes the code. Never rewrite a test to make it pass.
-- A preflight test validates deps and config and fails fast.
 - Assert questions about the repo; print questions about this machine.
 - Prefer invariants that would have failed before the fix landed over shape assertions.
 - Every test names the future diff that would turn it red; if the answer is "editing the test", delete it.
@@ -106,6 +105,12 @@ Dropping a line here deletes nothing.
 - Prefer a counter to a timing; compare against a control arm the harness runs, not against nothing.
 - Derive the exit code from the predicate the report prints; an empty success is a defect.
 - Every gate, spec and results table names what it does not cover, and what defeats it if protective.
+
+## Verifying against real targets — detail in [phase-3g-verifying-against-real-targets.md](phase-3g-verifying-against-real-targets.md)
+
+- A preflight test validates deps and config and fails fast.
+- Record a real target's output once and replay it offline; a changed command forces a new recording.
+- Keep a known-bad target and assert its failures; a check that never failed on a real target is unverified.
 
 ## Quality gates — detail in [phase-4-quality-gates.md](phase-4-quality-gates.md)
 

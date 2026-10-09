@@ -33,6 +33,8 @@ The common case. Everything in Tier 1, plus:
       number. Copy `config/feature-tracker.template.md`
 - [ ] A documentation update matrix — change class to the files it drags. Copy
       `config/doc-update-matrix.template.md`; walk it before each commit
+- [ ] Pre-push hook running the suite — copy `config/pre-push-verify.sh`. Once more than one
+      agent commits, a gate that depends on remembering to run it will eventually be skipped
 
 ## Tier 3 — large (50+ files, or 5+ domains, or long-lived with rotating agents)
 

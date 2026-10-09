@@ -21,6 +21,7 @@ triggers:
   - secret scanning
   - test plan creation
   - test timing
+  - live verification against real hosts
   - commit conventions
   - subagent delegation
   - handover protocol
@@ -63,11 +64,12 @@ working-set budget and what to escalate.
 | **2b: Decision records** | `references/phase-2b-decision-records.md` | Deciding what not to build, or recording why you chose this | Decision records with dated reasons, the feature tracker, numbers never reused |
 | **2c: Shipping** | `references/phase-2c-shipping.md` | About to commit, push, or advance the main branch | Commit conventions, the pre-commit documentation sweep and update matrix, pushing only where you were told, main advances on green |
 | **3a: Writing resilient code** | `references/phase-3a-writing-resilient-code.md` | Writing or hardening code | Circuit breakers, null guards, graceful degradation, idempotent migrations, parameterized queries, dry-run defaults, fencing untrusted content |
-| **3b: Verifying** | `references/phase-3b-verifying.md` | Writing tests or a test plan | Test isolation, living test plan, runner/fixer separation, naming a tier by what it proves, doc-truth checks |
+| **3b: Verifying** | `references/phase-3b-verifying.md` | Writing tests or a test plan | Test isolation, living test plan, runner/fixer separation, the Results table is not a change log |
 | **3c: Documenting** | `references/phase-3c-documenting.md` | Writing docstrings, README or changelog | Behavior not implementation, what to document and what not to, docstrings for agents, README and changelog conventions |
 | **3d: Checking what you claim** | `references/phase-3d-checking-what-you-claim.md` | A doc, a built package or a moved file makes a claim you want to keep true | Doc-truth checks, the changelog-entry assertion, artifact-versus-tree, proving a move by round-trip, proving an in-place remap by sampling |
 | **3e: Pre-commit security** | `references/phase-3e-pre-commit-security.md` | Installing or trusting a secret-scanning hook, or a credential has leaked | Blocking pre-commit secret scan, probing the hook in both directions, rotate-before-you-tidy, the scanner traps that make a hook look installed |
 | **3f: Numbers you can publish** | `references/phase-3f-numbers-you-can-publish.md` | Reporting a benchmark, a measurement or a performance claim | Noise floor before comparison, a control arm the harness runs, metrics scheduling cannot move, an empty success is a defect, saying what the number does not cover |
+| **3g: Verifying against real targets** | `references/phase-3g-verifying-against-real-targets.md` | A check is green offline but has never run on the hosts or data it exists for | Tiers named by what they prove, preflight and degraded-green runs, record live and replay offline, a known-bad target |
 | **4: Quality gates** | `references/phase-4-quality-gates.md` | Before declaring work done | Audit-gated milestones, escalation tiers, handover protocol |
 | **5a: Context docs** | `references/phase-5a-context-docs.md` | Creating or updating AGENTS.md / context docs | Create-or-skip rubric, hierarchy rules, child doc shape, area-level schema, cross-reference index, bootstrapping an undocumented repo |
 | **5b: Working & delegating** | `references/phase-5b-working-and-delegating.md` | About to edit a documented repo, or dispatching a subagent | Read the doc chain before editing, update it after, agent-facing tool output, subagent registry |
