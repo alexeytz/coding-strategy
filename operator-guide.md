@@ -1,12 +1,12 @@
 # Operator guide
 
 Companion to the `coding-strategy` skill. **This file is for the human running the work, not
-for the agent to load.** Everything here is a decision an agent cannot make for itself —
+for the agent to load.** Everything here is a decision an agent cannot make for itself -
 because it needs information the agent can't see (quota across subscriptions, what you
 actually want built) or because it's the prompt you paste to start the agent off.
 
-Agent-facing rules live in `references/phase-*.md`. Where a rule has both a human and an agent
-half, the agent half stays in the phase file and is cross-referenced here.
+Agent-facing rules live in the numbered files in `references/`. Where a rule has both a human and
+an agent half, the agent half stays in its file and is cross-referenced here.
 
 ---
 
@@ -17,35 +17,40 @@ Prompts worth keeping verbatim. They're the entry points where the agent has no 
 ### Building the AGENTS.md hierarchy
 
 For an undocumented repo that meets the CREATE threshold
-(see `references/phase-5a-context-docs.md`):
+(see `references/05-context-docs.md`, 5.2):
 
-> Build the AGENTS.md hierarchy for this repo — scan all folders, create a child AGENTS.md in
-> each domain folder with purpose, ownership, local contracts, and a child index.
+> Build the AGENTS.md hierarchy for this repo - scan all folders, create a child AGENTS.md in
+> each domain folder with purpose, ownership, local contracts, and a child index. Make the root's
+> first Global Rule the coding-strategy template's line that says to load the skill.
 
 The agent reads the codebase and creates the tree (~5 min for a medium repo). No install, no
-tool — just markdown files. Review the result before trusting it: the agent will infer
+tool - just markdown files. Review the result before trusting it: the agent will infer
 ownership and conventions that only you can confirm.
 
 ### Pre-design interview
 
 Before the agent writes a design doc
-(see `references/phase-2a-designing-a-change.md`):
+(see `references/08-designing-a-change.md`, 8.1):
 
-> Act as a technical interviewer. Ask me clarifying questions about what I'm trying to build.
-> Don't proceed until you've explored edge cases, data requirements, and failure modes.
-> Ask one question at a time.
+> Act as a technical interviewer. Ask me clarifying questions about what I'm trying to build,
+> one at a time, each with your best guess at my answer. Start with who it's for, why, what
+> success looks like and what's out of scope, and restate it for my yes. Then ask only the
+> design questions - data, edge cases, failure modes - that have no sensible default, and
+> list the defaults you assumed. Don't proceed until I've confirmed both.
 
 Humans are bad at expressing requirements upfront. The agent only knows what it's told; it
 won't surface forks in the road until you're forced to confront them. This catches ambiguity
-before it becomes code.
+before it becomes code. Correcting a wrong guess is quicker than answering from scratch, and
+the list of assumed defaults is the part to read closely - it is where the agent decided for
+you.
 
 ---
 
 ## Orchestration across tools
 
 When you're running multiple agents across different tools or subscriptions, these are your
-calls to make. The orchestrating session — the one that dispatches work rather than doing it,
-what these projects call the *First Mate* — owns them.
+calls to make. The orchestrating session - the one that dispatches work rather than doing it,
+what these projects call the *First Mate* - owns them.
 
 ### Session reset pacing
 
@@ -56,7 +61,7 @@ costs the new session time re-establishing context, so a reset mid-task is pure 
 ### Quota awareness before dispatch
 
 Check subscription and API usage *before* delegating. If a tool's quota is nearly exhausted,
-route the task elsewhere or defer it until reset — a task started on a half-depleted budget
+route the task elsewhere or defer it until reset - a task started on a half-depleted budget
 tends to die at the expensive end, with the work half-done and the context gone.
 
 ### Tool routing
@@ -66,27 +71,27 @@ always reaching for the same one. An agent cannot do this for you: it has no vis
 another tool's account.
 
 Quota decides *which account* a task runs on; the kind of work decides *which grade of model*.
-Put specifying and accepting on the strongest model you have — design, acceptance criteria,
-the failing tests, the final diff review — and implementation on the cheapest model that can
+Put specifying and accepting on the strongest model you have - design, acceptance criteria,
+the failing tests, the final diff review - and implementation on the cheapest model that can
 turn those tests green. The hand-down format and where the split stops working are in
-`references/small-model-operation.md` (*Hand down a failing test, not a plan*).
+`references/30-handing-work-to-a-small-model.md` (30.4, *Hand down a failing test, not a plan*).
 
 ---
 
 ## Decisions the agent must not make alone
 
-Collected from across the phases, for when you're deciding how much rope to give a session:
+Collected from across the files, for when you're deciding how much rope to give a session:
 
-- **Data schema** — the agent proposes, you approve. Agent-designed schemas produce features
-  the data layer can't support (`references/phase-6-reference.md`).
-- **Feature selectivity** — an agent will happily generate a hundred individually reasonable
+- **Data schema** - the agent proposes, you approve. Agent-designed schemas produce features
+  the data layer can't support (`references/37-reference.md`).
+- **Feature selectivity** - an agent will happily generate a hundred individually reasonable
   features that are collectively unmaintainable. Saying no is your job.
-- **Escalate / Block tier findings** — anything touching public API shape, auth, security
+- **Escalate / Block tier findings** - anything touching public API shape, auth, security
   boundaries, or a migration with data-loss potential
-  (`references/phase-4-quality-gates.md`).
-- **Contradictory task assignments** — if a `ta/` file contradicts itself, the agent is
-  instructed to ask rather than pick (`references/phase-2a-designing-a-change.md`).
-- **Where the code is hosted.** Not a technical choice — a custody choice, and it needs
+  (`references/23-audit-milestones.md`, 23.2).
+- **Contradictory task assignments** - if a `ta/` file contradicts itself, the agent is
+  instructed to ask rather than pick (`references/09-task-assignments.md`, 9.7).
+- **Where the code is hosted.** Not a technical choice - a custody choice, and it needs
   information an agent does not have: your client contracts, your employer's policy, whether
   this repo will ever be public. Decide it once, per project, before the first commit, because
   moving a repo later does not move what has already been fetched.
@@ -100,10 +105,10 @@ Collected from across the phases, for when you're deciding how much rope to give
     decision; there is no option without one.
 
   Whatever you choose, configure the remote yourself and let the agent inherit it. The agent
-  half of this rule — never add a remote, never push to a host it was not given — is in
-  `references/phase-2b-decision-records.md` §6, because it is a rule an agent can follow
+  half of this rule - never add a remote, never push to a host it was not given - is in
+  `references/25-shipping.md` (25.4), because it is a rule an agent can follow
   and this is a judgement it cannot make.
 
-- **Accumulated self-modifications** — if you enabled the experimental self-modifying
+- **Accumulated self-modifications** - if you enabled the experimental self-modifying
   instructions pattern, the change log needs a human read at a known checkpoint
-  (`references/phase-3a-writing-resilient-code.md`).
+  (`references/11-resilient-code.md`, 11.9).

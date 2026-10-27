@@ -1,5 +1,5 @@
-# Starter gitleaks config — copy to a project as .gitleaks.toml.
-# Follows the default.* convention from phase-1b §3: don't edit this file in place,
+# Starter gitleaks config - copy to a project as .gitleaks.toml.
+# Follows the default.* convention from file 3 (3.5): don't edit this file in place,
 # copy it and edit the copy.
 
 title = "project secret scan"
@@ -19,7 +19,7 @@ useDefault = true
 # Every entry needs a reason. An allowlist without reasons becomes a place
 # where real secrets go to hide.
 #
-# NO LOOKAROUND. gitleaks compiles these with Go's RE2, which has none — and a
+# NO LOOKAROUND. gitleaks compiles these with Go's RE2, which has none - and a
 # `(?!` or `(?<` does not fail that one rule, it PANICS the entire scan. The
 # hook then reports a crash rather than a verdict, so the repo is unprotected
 # while still appearing to have a scanner. Cost a debugging cycle on
@@ -35,7 +35,7 @@ paths = [
   # `ghp_`-shaped token was BLOCKED in src/ and COMMITTED CLEAN in docs/ with
   # this file installed as .gitleaks.toml. Setup instructions are exactly where
   # someone pastes a live token while writing them down, so this entry made the
-  # scanner report clean on the highest-risk path in the repo — the "quietly
+  # scanner report clean on the highest-risk path in the repo - the "quietly
   # no-ops, and you'll trust it" failure the hook's own header calls worse than
   # none. If doc examples trip the scan, allowlist the fake value by regex
   # below, not the whole directory by path.

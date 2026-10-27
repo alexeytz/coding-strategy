@@ -1,4 +1,4 @@
-# <domain> — AGENTS.md
+# <domain> - AGENTS.md
 
 ## Purpose
 
@@ -12,7 +12,7 @@ TODO: Owner.
 
 ## Local Contracts
 
-<!-- Rules specific to this domain — only things that don't apply repo-wide -->
+<!-- Rules specific to this domain - only things that don't apply repo-wide -->
 TODO: Domain-specific rules, naming conventions, import patterns, etc.
 
 ## Negative Constraints
@@ -30,7 +30,7 @@ TODO: Conventions, patterns, gotchas, file-by-file notes if needed.
 <!-- How to test/verify changes in this domain -->
 TODO: Test command, relevant test files, manual checks.
 
-## Child DOX Index
+## Child Docs Index
 
 <!-- List subfolder AGENTS.md files, or leave empty if no children -->
 No children.
